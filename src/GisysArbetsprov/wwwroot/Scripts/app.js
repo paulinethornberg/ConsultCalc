@@ -10,6 +10,9 @@ $("#deleteButton").click(function () {
     });
 });
 
+//function GetConsultantInfo(id) {
+//    $.post("/Consultant/GetConsultantInfo",  {"id": id})}
+
 function DeleteUser(id) {
     $.post("/Consultant/DeleteConsultant",  {"id": id}, function (deleteResult) {
         if (deleteResult)
@@ -21,12 +24,29 @@ function DeleteUser(id) {
 }
 
 
-//function openPreview() {
-//    document.getElementById("namePreview").innerHTML = document.getElementById("nameform").value;
-//    document.getElementById("summaryPreview").innerHTML = document.getElementById("sumform").value;
-//    document.getElementById("descriptionPreview").innerHTML = document.getElementById("descriptionform").value;
-//    document.getElementById("websitePreview").innerHTML = document.getElementById("websiteform").value;
-//    document.getElementById("facebookPreview").innerHTML = document.getElementById("facebookform").value;
+function GetConsultantInfo(id) {
+
+    alert(document.getElementById(id).innerHTML);
+    var lista = document.getElementById(id).innerHTML;
+    
+    //document.getElementById("firstNameForm").innerHTML = lista.getElementsByClassName(firstName).innerHTML;
+
+    //document.getElementById("firstNameForm").innerHTML = document.getElementById("firstName"-id).innerHTML;
+  
+
+    $('button.reveal-link').trigger('click');
+
+}
+
+//document.getElementById("lastNameForm").innerHTML = document.getElementById("lastname" + id).innerHTML;
+//document.getElementById("lastNameForm").value = document.getElementById("lastname" + id).innerHTML;
+//document.getElementById("lastNameForm").value = document.getElementById("lastname" + id).value;
+
+
+  //document.getElementById("summaryPreview").innerHTML = document.getElementById("sumform").value;
+  // document.getElementById("descriptionPreview").innerHTML = document.getElementById("descriptionform").value;
+  //  document.getElementById("websitePreview").innerHTML = document.getElementById("websiteform").value;
+  // document.getElementById("facebookPreview").innerHTML = document.getElementById("facebookform").value;
 //    document.getElementById("emailPreview").innerHTML = document.getElementById("emailform").value;
 //}
 

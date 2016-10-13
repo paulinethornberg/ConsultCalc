@@ -1,11 +1,36 @@
-﻿<p>Hello World</p>
+﻿@*<@model ConsultantCalculateVM[]
 
-<form>
-    <label class="material-label" for="hours">E-mail</label>
-    <input name="HoursDebiterade" class="material-field" id="hours" type="number">
+<div class="row column">
 
-    <div class="row">
-        <div class="small-12 small-push-4 columns">
-            <button>Calculate!</button>
-        </div>
-    </div></form>
+    <table>
+        <thead>
+            <tr>
+                <th width="200">First Name</th>
+                <th width="200">Last Name</th>
+                <th>Employment ID</th>
+                <th width="150">Date Of Employment</th>
+                <th>Loyalty Factor</th>
+                <th>Hours Worked</th>
+                <th width="150">Actions</th>
+                <th width="150"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var consultant in Model)
+            {
+                <tr id="@consultant.EmployeeId">
+                    <td class="firstName">@consultant.FirstName</td>
+                    <td> @consultant.LastName</td>
+                    <td id="id">@consultant.EmployeeId</td>
+                    <td id="dateEmp">@consultant.DateOfEmployement</td>
+                    <td><button class="button" OnClick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
+                    <td><button class="button alert" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+                    @*<a href="#" class="alert-button alert">Alert Button</a>*@
+
+
+                @*</tr>
+            }
+
+        </tbody>
+    </table>
+</div>*@

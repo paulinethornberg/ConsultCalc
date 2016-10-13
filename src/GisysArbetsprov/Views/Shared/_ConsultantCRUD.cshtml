@@ -1,23 +1,43 @@
-﻿
-<form method="post" action="AddConsultant" enctype="multipart/form-data">
-    <label>
-        First Name
-        <input type="text" name="FirstName" placeholder="firstName">
-    </label>
-    <label>
-        Last Name
-        <input type="text" name="LastName" placeholder="somebody@example.com">
-    </label>
-    <label>
-        Date of Employment
-        <input type="datetime" name="DateOfEmployment" placeholder="somebody@example.com">
-    </label>
-    <label>
-        Password
-        <input type="text" placeholder="Password">
-    </label>
-    <div class="small-12 small-push-4 columns">
-        <button>Send it !</button>
-    </div>
-    
-</form>
+﻿@model AddConsultantVM
+
+<div class="small reveal" id="MyModal" data-reveal>
+    @*@Html.Partial("_ConsultantCRUD")*@
+    @if (ViewBag.Message != null)
+    {
+        <div class="small-12 columns">
+
+            <div data-alert class="alert-box warning">
+                <i class="fi-alert"></i> Please fill in all required fields. @ViewBag.Message
+                <a href="#" class="close">&CircleTimes;</a>
+            </div>
+        </div>
+    }
+    <form data-abide method="post" action="AddConsultant">
+        <div class="name-field">
+            <label>
+                Förnamn
+                <input type="text" required pattern="[a-zA-Z]+" name="FirstName" value="@Model.FirstName">
+            </label>
+        </div>
+        <div class="name-field">
+            <label>
+                Efternamn
+                <input type="text" required pattern="[a-zA-Z]+" value="@Model.LastName">
+            </label>
+        </div>
+        <div class="date-field">
+            <label>
+                Anställningsdatum
+                <input type="date" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
+            </label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <button class="close-button small" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<button class="button success" data-open="MyModal">Add Consultant</button>

@@ -215,6 +215,8 @@
 "C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\Entities\Consultants.cs"
 "C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\Entities\GisysDBContext.cs"
 "C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\ViewModels\AddConsultantVM.cs"
+"C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\ViewModels\ConsultantBonusInfoVM.cs"
+"C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\ViewModels\ConsultantCalculateVM.cs"
 "C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\ViewModels\ConsultantListVM.cs"
 "C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\ViewModels\HomeIndexVM.cs"
 "C:\Users\Administrator\Documents\Visual Studio 2015\Projects\GisysArbetsprov\src\GisysArbetsprov\Models\ViewModels\RegisterVM.cs"

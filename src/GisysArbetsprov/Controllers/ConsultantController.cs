@@ -29,17 +29,18 @@ namespace GisysArbetsprov.Controllers
         {
             // GET DATA FROM DB - WITH EF - GET ALL CONSULTANTS :) 
             var viewModel = dataManager.GetConsultantsFromDB();
-            
+
             return View(viewModel);
         }
         public IActionResult Calculate()
         {
+            var viewModel = dataManager.GetConsultantsWithBonusInfoFromDB();
             return View();
         }
 
         public IActionResult AddConsultant(AddConsultantVM viewModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 //ViewBag.Message = "Something went wrong.. Did you submit the values in the right format? ";
                 ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
@@ -50,7 +51,7 @@ namespace GisysArbetsprov.Controllers
 
             ViewBag.Message = "Consultant was successfully added!";
             return RedirectToAction("List");
-            
+
 
             // Lägg till View(_partialView) :) 
         }
@@ -68,8 +69,15 @@ namespace GisysArbetsprov.Controllers
                 ViewBag.Message = "OUuupps something went wrong";
                 return RedirectToAction("List");
             }
-            
+
         }
-        
+        public IActionResult GetConsultantInfo(int id)
+        {
+            var viewModel = new AddConsultantVM();
+            viewModel = dataManager.GetSingleConsultantInfo(id);
+            return View(viewModel);
+        }
+
+      
     }
 }

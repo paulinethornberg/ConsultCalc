@@ -17,7 +17,7 @@
 }
 <h1>Consultants</h1>
 
-<div class="small reveal" id="exampleModal1" data-reveal>
+<div class="small reveal" id="MyModal" data-reveal>
     @*@Html.Partial("_ConsultantCRUD")*@
     @if (ViewBag.Message != null)
     {
@@ -33,13 +33,13 @@
         <div class="name-field">
             <label>
                 Förnamn
-                <input type="text" required pattern="[a-zA-Z]+" name="FirstName">
+                <input type="text" id="firsNameForm" required pattern="[a-zA-Z]+" name="FirstName">
             </label>
         </div>
         <div class="name-field">
             <label>
                 Efternamn
-                <input type="text" required pattern="[a-zA-Z]+" name="LastName">
+                <input type="text" id="lastNameForm" required pattern="[a-zA-Z]+" name="LastName">
             </label>
         </div>
         <div class="date-field">
@@ -57,7 +57,7 @@
 </button>
 </div>
 
-<button data-open="exampleModal1">Add Consultant</button>
+<button class="button success" data-open="MyModal">Add Consultant</button>
 
 
 
@@ -77,13 +77,15 @@
         <tbody>
             @foreach (var consultant in Model)
             {
-                <tr>
-                    <td>@consultant.FirstName</td>
-                    <td> @consultant.LastName</td>
-                    <td>@consultant.EmployeeId</td>
-                    <td>@consultant.DateOfEmployement</td>
-                    <td><button>Update</button></td>
-                    <td><button id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)">Delete</button></td>
+                <tr id="@consultant.EmployeeId">
+                    <td class="firstName">@consultant.FirstName</td>
+                    <td > @consultant.LastName</td>
+                    <td id="id">@consultant.EmployeeId</td>
+                    <td id="dateEmp">@consultant.DateOfEmployement</td>
+                    <td><button class="button" OnClick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
+                    <td><button class="button alert"id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+                    @*<a href="#" class="alert-button alert">Alert Button</a>*@
+
                     
                 </tr>
             }

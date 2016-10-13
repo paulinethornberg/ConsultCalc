@@ -32,6 +32,25 @@ namespace GisysArbetsprov.Models
                 .ToArray();
 
         }
+        internal ConsultantBonusInfoVM[] GetConsultantsWithBonusInfoFromDB()
+        {
+            return _context.Consultants
+               .Select(c => new ConsultantBonusInfoVM
+               {
+                   
+                   DateOfEmployment =c.DateOfEmployment,
+                   FirstName = c.FirstName,
+                   LastName = c.LastName,
+                   HoursWorked = c.HoursWorked
+                   //EmployeeCategory = CalculateYearsOfEmployment(c.DateOfEmployment)
+               })
+               .ToArray();
+        }
+
+        //private int CalculateYearsOfEmployment(DateTime? dateOfEmployment)
+        //{
+        //    int days = (DateTime.Today - dateOfEmployment).Days;
+        //}
 
         internal void SaveConsultantToDB(AddConsultantVM viewModel)
         {
@@ -47,6 +66,7 @@ namespace GisysArbetsprov.Models
 
         }
 
+
         internal bool RemoveConsultantFromDB(int id)
         {
             var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id); //returns a single item.
@@ -58,6 +78,18 @@ namespace GisysArbetsprov.Models
                 return true;
             }
             return false;
+        }
+
+        internal AddConsultantVM GetSingleConsultantInfo(int id)
+        {
+            return _context.Consultants
+                .Where(x => x.Id == id)
+                .Select(c => new AddConsultantVM
+                {
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    DateOfEmployment = c.DateOfEmployment
+                }).FirstOrDefault();
         }
     }
 }
