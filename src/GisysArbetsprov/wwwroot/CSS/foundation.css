@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /**
  * Foundation for Sites by ZURB
  * Version 6.2.3
@@ -2054,7 +2054,7 @@ select {
   color: #8a8a8a;
   right: 1rem;
   top: 0.5rem;
-  font-size: 2em;
+
   line-height: 1;
   cursor: pointer; }
   [data-whatinput='mouse'] .close-button {

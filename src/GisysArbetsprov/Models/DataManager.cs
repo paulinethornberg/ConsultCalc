@@ -32,5 +32,32 @@ namespace GisysArbetsprov.Models
                 .ToArray();
 
         }
+
+        internal void SaveConsultantToDB(AddConsultantVM viewModel)
+        {
+            var consultant = new Consultants
+            {
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                DateOfEmployment = viewModel.DateOfEmployment
+            };
+
+            _context.Consultants.Add(consultant);
+            _context.SaveChanges();
+
+        }
+
+        internal bool RemoveConsultantFromDB(int id)
+        {
+            var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id); //returns a single item.
+
+            if (itemToRemove != null)
+            {
+                _context.Consultants.Remove(itemToRemove);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

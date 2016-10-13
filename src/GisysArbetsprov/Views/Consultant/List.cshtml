@@ -1,46 +1,93 @@
 ﻿@model ConsultantListVM[]
-
+<script src="~/Scripts/jquery.min.js"></script>
 <script src="~/Scripts/jquery.mixitup.min.js"></script>
 <link href="~/CSS/MixItUp.css" rel="stylesheet" />
 <script src="~/Scripts/MixItUp.js"></script>
+<script src="~/Scripts/foundation.min.js"></script>
+<script src="~/Scripts/app.js"></script>
+@if (ViewBag.Message != null)
+{
+    <div class="small-12 columns">
 
-<div class="controls">
-    <label>Filter:</label>
+        <div data-alert class="alert-box warning">
+            <i class="fi-alert"></i> Please fill in all required fields. @ViewBag.Message
+            <a href="#" class="close">&CircleTimes;</a>
+        </div>
+    </div>
+}
+<h1>Consultants</h1>
 
-    <button class="filter" data-filter="all">All</button>
-    <button class="filter" data-filter=".category-1">Employee Category 1</button>
-    <button class="filter active" data-filter=".category-2">Employee Category 2</button>
-
-    <label>Sort:</label>
-
-    <button class="sort" data-sort="myorder:asc">Asc</button>
-    <button class="sort" data-sort="myorder:desc">Desc</button>
-
-    <label>Change Layout:</label>
-    <button id="ChangeLayout">Grid</button>
-
-    <label>Search:</label>
-        <input type="text" placeholder="Search ..." />
-</div>
-<div id="Container" class="container">
-
-    @foreach (var consultant in Model)
+<div class="small reveal" id="exampleModal1" data-reveal>
+    @*@Html.Partial("_ConsultantCRUD")*@
+    @if (ViewBag.Message != null)
     {
-        <div class="mix category-@consultant.EmployeeCategory" data-myorder="@consultant.EmployeeId">
-            @*<p>@consultant</p>*@
-            <ul>
-            <li>
-          
-                </li>
-                <li>
-                    @consultant.DateOfEmployement
-                </li>
-                
-                </ul>
+        <div class="small-12 columns">
+
+            <div data-alert class="alert-box warning">
+                <i class="fi-alert"></i> Please fill in all required fields. @ViewBag.Message
+                <a href="#" class="close">&CircleTimes;</a>
+            </div>
         </div>
     }
+    <form data-abide method="post" action="AddConsultant">
+        <div class="name-field">
+            <label>
+                Förnamn
+                <input type="text" required pattern="[a-zA-Z]+" name="FirstName">
+            </label>
+        </div>
+        <div class="name-field">
+            <label>
+                Efternamn
+                <input type="text" required pattern="[a-zA-Z]+" name="LastName">
+            </label>
+        </div>
+        <div class="date-field">
+            <label>
+                Anställningsdatum
+                <input type="date" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
+            </label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
    
 
-    <div class="gap"></div>
-    <div class="gap"></div>
+<button class="close-button small" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<button data-open="exampleModal1">Add Consultant</button>
+
+
+
+<div class="row column">
+
+    <table>
+        <thead>
+            <tr>
+                <th width="200">First Name</th>
+                <th width="200">Last Name</th>
+                <th>Employment ID</th>
+                <th width="150">Date Of Employment</th>
+                <th width="150">Actions</th>
+                <th width="150"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var consultant in Model)
+            {
+                <tr>
+                    <td>@consultant.FirstName</td>
+                    <td> @consultant.LastName</td>
+                    <td>@consultant.EmployeeId</td>
+                    <td>@consultant.DateOfEmployement</td>
+                    <td><button>Update</button></td>
+                    <td><button id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)">Delete</button></td>
+                    
+                </tr>
+            }
+
+        </tbody>
+    </table>
 </div>

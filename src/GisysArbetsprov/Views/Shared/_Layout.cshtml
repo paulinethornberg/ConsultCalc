@@ -4,11 +4,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/CSS/foundation.css" rel="stylesheet" />
-    <script src="~/Scripts/foundation.min.js"></script>
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/jquery.mixitup.min.js"></script>
     <link href="~/CSS/app.css" rel="stylesheet" />
+    <link href="~/CSS/foundation.css" rel="stylesheet" />
+   
+
 </head>
 <body>
     <header class="header">
@@ -22,5 +21,13 @@
     <div>
         @RenderBody()
     </div>
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/foundation.min.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/jquery.mixitup.min.js"></script>
+    <script>
+  $(document).foundation();
+    </script>
 </body>
 </html>

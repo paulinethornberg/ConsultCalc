@@ -36,5 +36,40 @@ namespace GisysArbetsprov.Controllers
         {
             return View();
         }
+
+        public IActionResult AddConsultant(AddConsultantVM viewModel)
+        {
+            if(!ModelState.IsValid)
+            {
+                //ViewBag.Message = "Something went wrong.. Did you submit the values in the right format? ";
+                ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+                return RedirectToAction("List");
+
+            }
+            dataManager.SaveConsultantToDB(viewModel);
+
+            ViewBag.Message = "Consultant was successfully added!";
+            return RedirectToAction("List");
+            
+
+            // Lägg till View(_partialView) :) 
+        }
+
+        public IActionResult DeleteConsultant(int id)
+        {
+            var result = dataManager.RemoveConsultantFromDB(id);
+            if (result)
+            {
+                ViewBag.Message = "Consultant successfully deleted";
+                return RedirectToAction("List");
+            }
+            else
+            {
+                ViewBag.Message = "OUuupps something went wrong";
+                return RedirectToAction("List");
+            }
+            
+        }
+        
     }
 }
