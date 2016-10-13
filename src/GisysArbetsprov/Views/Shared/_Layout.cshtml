@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/CSS/foundation.css" rel="stylesheet" />
+    <script src="~/Scripts/foundation.min.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.mixitup.min.js"></script>
+    <link href="~/CSS/app.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <h2 class="headline">Consultants <small>and</small> Calculations</h2>
+        <ul class="header-subnav is-dropdown-menu" data-dropdown-menu>
+            <li><a id="menu" href="/home/index" class="is-active">hOME</a></li>
+            <li><a id="menu" href="/consultant/list" class="is-active-none">Consultants</a></li>
+            <li><a id="menu" href="/consultant/calculate" class="is-active-none">BonusCalculator</a></li>
+        </ul>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
