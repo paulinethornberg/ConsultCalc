@@ -14,7 +14,7 @@ namespace GisysArbetsprov.Models.ViewModels
 
         public string LastName { get; set; }
 
-        public DateTime? DateOfEmployment { get; set; }
+        public DateTime DateOfEmployment { get; set; }
 
         public double HoursNoted { get; set; }
 

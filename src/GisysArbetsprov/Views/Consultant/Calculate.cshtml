@@ -1,4 +1,5 @@
-﻿@*<@model ConsultantCalculateVM[]
+﻿@model ConsultantCalculateVM
+
 
 <div class="row column">
 
@@ -9,6 +10,7 @@
                 <th width="200">Last Name</th>
                 <th>Employment ID</th>
                 <th width="150">Date Of Employment</th>
+                <th>Years of Employment</th>
                 <th>Loyalty Factor</th>
                 <th>Hours Worked</th>
                 <th width="150">Actions</th>
@@ -16,21 +18,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var consultant in Model)
+          @foreach (var consultant in Model.ConsultantList)
             {
                 <tr id="@consultant.EmployeeId">
                     <td class="firstName">@consultant.FirstName</td>
                     <td> @consultant.LastName</td>
                     <td id="id">@consultant.EmployeeId</td>
-                    <td id="dateEmp">@consultant.DateOfEmployement</td>
+                    <td id="id">@consultant.DateOfEmployment</td>
+                    <td id="dateEmp">@consultant.EmployeeCategory</td>
+                    <td id="id">@consultant.LoyaltyFactor</td>
+                    
+                    <td id="id"><input type="number" value="@consultant.HoursWorked"/></td>
+
+
                     <td><button class="button" OnClick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
                     <td><button class="button alert" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
-                    @*<a href="#" class="alert-button alert">Alert Button</a>*@
 
 
-                @*</tr>
+                </tr>
             }
 
         </tbody>
     </table>
-</div>*@
+</div>

@@ -35,7 +35,7 @@ namespace GisysArbetsprov.Controllers
         public IActionResult Calculate()
         {
             var viewModel = dataManager.GetConsultantsWithBonusInfoFromDB();
-            return View();
+            return View(viewModel);
         }
 
         public IActionResult AddConsultant(AddConsultantVM viewModel)

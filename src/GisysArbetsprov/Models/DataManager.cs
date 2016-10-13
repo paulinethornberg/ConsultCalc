@@ -32,25 +32,59 @@ namespace GisysArbetsprov.Models
                 .ToArray();
 
         }
-        internal ConsultantBonusInfoVM[] GetConsultantsWithBonusInfoFromDB()
+        internal ConsultantCalculateVM GetConsultantsWithBonusInfoFromDB()
         {
-            return _context.Consultants
+            var viewModel = new ConsultantCalculateVM();
+
+            var listOfConsultants = _context.Consultants
                .Select(c => new ConsultantBonusInfoVM
                {
-                   
-                   DateOfEmployment =c.DateOfEmployment,
+                   DateOfEmployment = c.DateOfEmployment,
                    FirstName = c.FirstName,
                    LastName = c.LastName,
-                   HoursWorked = c.HoursWorked
-                   //EmployeeCategory = CalculateYearsOfEmployment(c.DateOfEmployment)
+                   HoursWorked = null,
+                   EmployeeCategory = CalculateYearsOfEmployment(c.DateOfEmployment),
+                   EmployeeId = c.Id,
+                   LoyaltyFactor = GenerateLoyaltyFactor(c.DateOfEmployment)
                })
                .ToArray();
+
+            viewModel.ConsultantList = listOfConsultants;
+            return viewModel;
         }
 
-        //private int CalculateYearsOfEmployment(DateTime? dateOfEmployment)
-        //{
-        //    int days = (DateTime.Today - dateOfEmployment).Days;
-        //}
+        private double GenerateLoyaltyFactor(DateTime dateofEmployment)
+        {
+            var yearsOfemployment = CalculateYearsOfEmployment(dateofEmployment);
+            
+            switch (yearsOfemployment)
+            {
+                case 0:
+                    return 1;
+                case 1:
+                    return 1.1;
+                case 2:
+                    return 1.2;
+                case 3:
+                    return 1.3;
+                case 4:
+                    return 1.4;
+                default:
+                    return 1.5;            
+             }
+        }
+
+        private int CalculateYearsOfEmployment(DateTime dateOfEmployment)
+        {
+     
+            decimal tempYears = new decimal();
+             int days = (DateTime.Today - dateOfEmployment).Days;
+
+            tempYears = days / 365;
+            int years = Convert.ToInt32(Math.Round(tempYears));
+         
+            return years;
+        }
 
         internal void SaveConsultantToDB(AddConsultantVM viewModel)
         {

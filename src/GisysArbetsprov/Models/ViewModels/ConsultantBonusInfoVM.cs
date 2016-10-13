@@ -7,17 +7,17 @@ namespace GisysArbetsprov.Models.ViewModels
 {
     public class ConsultantBonusInfoVM
     {
+        public int EmployeeId { get; set; }
 
         public string FirstName { get; set; }
 
         public int? HoursWorked { get; set; }
 
-        public string LoyaltyFactor { get; set; }
+        public double LoyaltyFactor { get; set; }
         public string LastName { get; set; }
 
         public DateTime? DateOfEmployment { get; set; }
 
-        public double HoursNoted { get; set; }
 
         public int EmployeeCategory { get; set; }
     }

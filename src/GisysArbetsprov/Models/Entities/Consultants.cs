@@ -8,7 +8,7 @@ namespace GisysArbetsprov.Models.Entities
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime? DateOfEmployment { get; set; }
-        public int? HoursWorked { get; set; }
+        public DateTime DateOfEmployment { get; set; }
+        public int HoursWorked { get; set; }
     }
 }
