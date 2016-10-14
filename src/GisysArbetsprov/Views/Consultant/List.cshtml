@@ -1,8 +1,7 @@
 ﻿@model ConsultantListVM[]
 <script src="~/Scripts/jquery.min.js"></script>
 <script src="~/Scripts/jquery.mixitup.min.js"></script>
-<link href="~/CSS/MixItUp.css" rel="stylesheet" />
-<script src="~/Scripts/MixItUp.js"></script>
+
 <script src="~/Scripts/foundation.min.js"></script>
 <script src="~/Scripts/app.js"></script>
 @if (ViewBag.Message != null)
@@ -78,9 +77,9 @@
             @foreach (var consultant in Model)
             {
                 <tr id="@consultant.EmployeeId">
-                    <td class="firstName">@consultant.FirstName</td>
-                    <td > @consultant.LastName</td>
-                    <td id="id">@consultant.EmployeeId</td>
+                    <td id="firstName">@consultant.FirstName</td>
+                    <td id="lastName"> @consultant.LastName</td>
+                    <td id="empId">@consultant.EmployeeId</td>
                     <td id="dateEmp">@consultant.DateOfEmployement</td>
                     <td><button class="button" OnClick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
                     <td><button class="button alert"id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
@@ -92,4 +91,38 @@
 
         </tbody>
     </table>
+</div>
+
+<div>
+
+
+        <form data-abide method="post" action="Update">
+            <div class="name-field">
+                <label>
+                    EmployeeId
+                    <input type="text" id="idUpdateForm" required name="Id" readonly>
+                </label>
+            </div>
+            <div class="name-field">
+                <label>
+                    Förnamn
+                    <input type="text" id="firsNameUpdateForm" required pattern="[a-zA-Z]+" name="FirstName">
+                </label>
+            </div>
+            <div class="name-field">
+                <label>
+                    Efternamn
+                    <input type="text" id="lastNameUpdateForm" required name="LastName">
+                </label>
+            </div>
+            <div class="date-field">
+                <label>
+                    Anställningsdatum
+                    <input type="date" id="dateUpdateForm" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
+                </label>
+            </div>
+            <button type="submit">Update!</button>
+        </form>
+
+            
 </div>

@@ -32,25 +32,42 @@ namespace GisysArbetsprov.Models
                 .ToArray();
 
         }
-        internal ConsultantCalculateVM GetConsultantsWithBonusInfoFromDB()
+        internal ConsultantCalculateVM[] GetConsultantsWithBonusInfoFromDB()
         {
-            var viewModel = new ConsultantCalculateVM();
-
-            var listOfConsultants = _context.Consultants
-               .Select(c => new ConsultantBonusInfoVM
+            return _context.Consultants
+               .Select(c => new ConsultantCalculateVM
                {
                    DateOfEmployment = c.DateOfEmployment,
                    FirstName = c.FirstName,
                    LastName = c.LastName,
-                   HoursWorked = null,
+                   HoursWorked = c.HoursWorked,
                    EmployeeCategory = CalculateYearsOfEmployment(c.DateOfEmployment),
-                   EmployeeId = c.Id,
-                   LoyaltyFactor = GenerateLoyaltyFactor(c.DateOfEmployment)
+                   Id = c.Id,
+                   LoyaltyFactor = GenerateLoyaltyFactor(c.DateOfEmployment),
+                   Bonus = Math.Round(Convert.ToDouble(c.Bonus))
                })
                .ToArray();
 
-            viewModel.ConsultantList = listOfConsultants;
-            return viewModel;
+        }
+
+        internal void UpdateConsultantInfoDB(UpdateConsultantVM viewModel)
+        {
+            var consultant = (from x in _context.Consultants
+                              where x.Id == viewModel.Id
+                              select x).First();
+            consultant.FirstName = viewModel.FirstName;
+            consultant.LastName = viewModel.LastName;
+            consultant.DateOfEmployment = viewModel.DateOfEmployment;
+            _context.SaveChanges();
+        }
+
+        internal void UpdateHoursForConsultant(ConsultantCalculateVM viewModel)
+        {
+            var consultant = (from x in _context.Consultants
+                              where x.Id == viewModel.Id
+                              select x).First();
+            consultant.HoursWorked = viewModel.HoursWorked;
+            _context.SaveChanges();
         }
 
         private double GenerateLoyaltyFactor(DateTime dateofEmployment)
@@ -100,18 +117,41 @@ namespace GisysArbetsprov.Models
 
         }
 
-
-        internal bool RemoveConsultantFromDB(int id)
+        internal void CalculateBonusAndAddToDB(ConsultantCalculateVM viewModel)
         {
-            var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id); //returns a single item.
+            double bonusBase = 0.05 * viewModel.Performace;
 
-            if (itemToRemove != null)
+            var consultants = GetConsultantsWithBonusInfoFromDB();
+
+
+            double pointsHoursCharged = new double();
+
+            double totalPointsHoursCharged = new double();
+             // gågner - 
+            foreach (var consulant in consultants)
             {
-                _context.Consultants.Remove(itemToRemove);
-                _context.SaveChanges();
-                return true;
+                pointsHoursCharged = consulant.LoyaltyFactor * Convert.ToDouble(consulant.HoursWorked);
+
+                totalPointsHoursCharged += pointsHoursCharged;
+
+                consulant.PerformancePoints = pointsHoursCharged;
             }
-            return false;
+
+            foreach (var consultant in consultants)
+            {
+                consultant.Bonus = (consultant.PerformancePoints / totalPointsHoursCharged)*bonusBase;
+            }
+
+            foreach (var consultant in consultants)
+            {
+                var t = (from x in _context.Consultants
+                         where x.Id == consultant.Id
+                         select x).First();
+                t.Bonus = consultant.Bonus;
+                _context.SaveChanges();
+            }
+  
+
         }
 
         internal AddConsultantVM GetSingleConsultantInfo(int id)
@@ -124,6 +164,19 @@ namespace GisysArbetsprov.Models
                     LastName = c.LastName,
                     DateOfEmployment = c.DateOfEmployment
                 }).FirstOrDefault();
+        }
+
+        internal bool RemoveConsultantFromDB(int id)
+        {
+            var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id); //returns a single item.
+
+            if (itemToRemove != null)
+            {
+                _context.Consultants.Remove(itemToRemove);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

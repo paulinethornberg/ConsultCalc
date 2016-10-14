@@ -24,7 +24,7 @@ namespace GisysArbetsprov.Controllers
             dataManager = new DataManager(context, userManager);
             _environment = environment;
         }
-        // GET: /<controller>/
+
         public IActionResult List()
         {
             // GET DATA FROM DB - WITH EF - GET ALL CONSULTANTS :) 
@@ -37,7 +37,26 @@ namespace GisysArbetsprov.Controllers
             var viewModel = dataManager.GetConsultantsWithBonusInfoFromDB();
             return View(viewModel);
         }
+        public IActionResult Update(UpdateConsultantVM viewModel)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+            //    return RedirectToAction("List");
+            //}
 
+            dataManager.UpdateConsultantInfoDB(viewModel);
+
+            ViewBag.Message = "Update Succeeded";
+            return RedirectToAction("List");
+        }
+
+        public IActionResult AddHoursWorked(ConsultantCalculateVM viewModel)
+        {
+            dataManager.UpdateHoursForConsultant(viewModel);
+            return RedirectToAction("Calculate");
+        }
+            
         public IActionResult AddConsultant(AddConsultantVM viewModel)
         {
             if (!ModelState.IsValid)
@@ -61,7 +80,8 @@ namespace GisysArbetsprov.Controllers
             var result = dataManager.RemoveConsultantFromDB(id);
             if (result)
             {
-                ViewBag.Message = "Consultant successfully deleted";
+                //ViewBag.Message = "Consultant successfully deleted";
+                //return RedirectToAction("Consultant", "List");
                 return RedirectToAction("List");
             }
             else
@@ -78,6 +98,12 @@ namespace GisysArbetsprov.Controllers
             return View(viewModel);
         }
 
-      
+        public IActionResult CalculateBonus(ConsultantCalculateVM viewModel)
+        {
+            dataManager.CalculateBonusAndAddToDB(viewModel);
+   
+            return RedirectToAction("Calculate");
+        }
+        
     }
 }

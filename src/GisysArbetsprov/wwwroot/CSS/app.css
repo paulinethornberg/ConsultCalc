@@ -75,6 +75,9 @@ footer{
   left: 150px;
   top: 350px;
 }
+
+.hidden { display: none; }
+
 /*-------------------BUTTON GROUPS FOR TAGS
 
 

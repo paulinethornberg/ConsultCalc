@@ -135,13 +135,15 @@ namespace GisysArbetsprov.Models.Entities
 
             modelBuilder.Entity<Consultants>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.DateOfEmployment).HasColumnType("date");
 
-                entity.Property(e => e.FirstName).HasMaxLength(50);
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.LastName).HasColumnType("nchar(10)");
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasColumnType("nchar(10)");
             });
         }
 
