@@ -27,17 +27,23 @@ namespace GisysArbetsprov.Models
                     EmployeeId = c.Id,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
-                    DateOfEmployement = c.DateOfEmployment
+                    DateOfEmployement = GetDateRightFormat(c.DateOfEmployment)
                 })
                 .ToArray();
-
         }
+
+        private string GetDateRightFormat(DateTime dateOfEmployment)
+        {
+            var tmpString = dateOfEmployment.ToString();
+            return tmpString.Substring(0, 10);
+        }
+
         internal ConsultantCalculateVM[] GetConsultantsWithBonusInfoFromDB()
         {
             return _context.Consultants
                .Select(c => new ConsultantCalculateVM
                {
-                   DateOfEmployment = c.DateOfEmployment,
+                   DateOfEmployment = GetDateRightFormat(c.DateOfEmployment),
                    FirstName = c.FirstName,
                    LastName = c.LastName,
                    HoursWorked = c.HoursWorked,
@@ -119,21 +125,19 @@ namespace GisysArbetsprov.Models
 
         internal void CalculateBonusAndAddToDB(ConsultantCalculateVM viewModel)
         {
+            //get the 5% of the performance
             double bonusBase = 0.05 * viewModel.Performace;
 
+            // get a list of all consultants
             var consultants = GetConsultantsWithBonusInfoFromDB();
-
-
-            double pointsHoursCharged = new double();
-
+        
+            //logic to calculate the individual points and add to total
             double totalPointsHoursCharged = new double();
-             // gågner - 
+
             foreach (var consulant in consultants)
             {
-                pointsHoursCharged = consulant.LoyaltyFactor * Convert.ToDouble(consulant.HoursWorked);
-
+                var pointsHoursCharged = consulant.LoyaltyFactor * Convert.ToDouble(consulant.HoursWorked);
                 totalPointsHoursCharged += pointsHoursCharged;
-
                 consulant.PerformancePoints = pointsHoursCharged;
             }
 
@@ -142,6 +146,7 @@ namespace GisysArbetsprov.Models
                 consultant.Bonus = (consultant.PerformancePoints / totalPointsHoursCharged)*bonusBase;
             }
 
+            // Save bonus to DB - use ID to save to right consultant
             foreach (var consultant in consultants)
             {
                 var t = (from x in _context.Consultants
@@ -150,8 +155,6 @@ namespace GisysArbetsprov.Models
                 t.Bonus = consultant.Bonus;
                 _context.SaveChanges();
             }
-  
-
         }
 
         internal AddConsultantVM GetSingleConsultantInfo(int id)
@@ -169,7 +172,6 @@ namespace GisysArbetsprov.Models
         internal bool RemoveConsultantFromDB(int id)
         {
             var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id); //returns a single item.
-
             if (itemToRemove != null)
             {
                 _context.Consultants.Remove(itemToRemove);

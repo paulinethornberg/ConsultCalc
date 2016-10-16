@@ -11,10 +11,11 @@ namespace GisysArbetsprov.Models.ViewModels
         [Required]
         public string UserName { get; set; }
         [Required]
-
+ 
         public string Password { get; set; }
 
         [Required]
+        [EmailAddress(ErrorMessage ="Ange en giltig emailadress")]
         public string Email { get; set; }
     }
 }

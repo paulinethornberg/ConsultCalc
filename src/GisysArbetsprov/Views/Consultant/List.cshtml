@@ -16,7 +16,7 @@
 }
 
 <div class="row">
-    <div class="addButton"><button class="button success" data-open="MyModal">Add New Consultant</button></div>
+    <div class="addButton"><button class="button tableStyle" data-open="MyModal">Add New Consultant</button></div>
 </div>
 
 
@@ -69,26 +69,26 @@
     <table class="center">
         <thead>
             <tr>
-                <th></th>
-                <th width="200">FÖRNAMN</th>
-                <th width="200">EFTERNAMN</th>
-                <th>ANSTÄLLNINGSNUMMER</th>
-                <th width="150">ANSTÄLLNINGSDATUM</th>
-                <th width="150">ACTIONS</th>
+                <th width="200"></th>
+                <th width="200">Förnamn</th>
+                <th width="200">Efternamn</th>
+                <th width="150">AnställningsID</th>
+                <th width="150">Anställningsdatum</th>
+                <th width="150">Actions</th>
                 <th width="150"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var consultant in Model)
             {
-                <tr class="tableStyle" id="@consultant.EmployeeId">
-                    <td><img src="~/Images/consultant.jpg" /></td>
+                <tr class="textStyle" id="@consultant.EmployeeId">
+                    <td><img style="width:50%" src="~/Images/pauline-profilbild.png" /> </td>
                     <td id="firstName">@consultant.FirstName</td>
                     <td id="lastName"> @consultant.LastName</td>
                     <td id="empId">@consultant.EmployeeId</td>
                     <td id="dateEmp">@consultant.DateOfEmployement</td>
-                    <td><button class="button" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
-                    <td><button class="button alert" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+                    <td><button class="button blueButton" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
+                    <td><button class="button redButton" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
                     @*<a href="#" class="alert-button alert">Alert Button</a>*@
 
 

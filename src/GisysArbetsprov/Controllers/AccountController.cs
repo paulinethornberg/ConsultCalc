@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using GisysArbetsprov.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using GisysArbetsprov.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,6 +31,8 @@ namespace GisysArbetsprov.Controllers
             //_context = context;
         }
 
+
+        [AllowAnonymous]
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -68,5 +71,20 @@ namespace GisysArbetsprov.Controllers
 
             return RedirectToAction(nameof(HomeController.Index), "home");
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<bool> Login(AccountLoginVM viewModel)
+        {
+            var result = await _signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
+            return result.Succeeded;
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

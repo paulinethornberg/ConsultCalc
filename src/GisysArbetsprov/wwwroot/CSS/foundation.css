@@ -3173,7 +3173,7 @@ table {
     table thead td,
     table tfoot th,
     table tfoot td {
-      padding: 0.5rem 0.625rem 0.625rem;
+      padding:1.2rem 1.625rem 1.2rem;
       font-weight: bold;
       text-align: left; }
   table tbody tr:nth-child(even) {

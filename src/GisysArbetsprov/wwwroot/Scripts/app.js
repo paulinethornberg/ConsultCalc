@@ -2,10 +2,10 @@
 
 
 $("#edit").click(function () {
-    $("#bonus").hide();
+    $(".bonus").hide();
 });
 $("#bonusClick").click(function () {
-    $("#bonus").show();
+    $(".bonus").show();
 });
 
 
@@ -57,8 +57,4 @@ function GetConsultantInfo(id) {
     $('#idUpdateForm').val(id);
 
 
-}
-
-function ShowBonus() {
-    $('#bonus').Show();
 }

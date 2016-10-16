@@ -1,8 +1,9 @@
 
 
 body {
-    background-image: url('../images/2016-10-13 (2).png');
-    background-color: #cccccc;
+    /*background-image: url('../images/2016-10-13 (2).png');*/
+    /*background-color: #cccccc;*/
+    background-color: #ffe;
 }
 
 table {
@@ -33,7 +34,7 @@ table {
     display: inline-block; }
     .header-subnav li a {
       padding: 0.9rem 1rem;
-      font-size: 1rem;
+      font-size: 1.3rem;
       color: #ffe;
       text-transform: uppercase;
       display: block;
@@ -103,6 +104,7 @@ footer{
     width: 500px;
 }
 
+
 #MyModal {
       display: block;
     max-height: 5872px;
@@ -121,5 +123,29 @@ footer{
     font-weight:bold;
 }
 
+.redButton {
+    color: white;
+    background-image: url('../images/redimage.png');
+    font-size: 18px;
+    font-weight: bold;
+}
+.blueButton {
+    color: white;
+    background-image: url('../images/blueimage.png');
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.textStyle {
+    font-size:16px; 
+    font-weight: bold;
+    color:#2abb9b;
+    text-align:left;
+}
+
+.indexButton {
+   padding: 12em 12em;
+      font-size:20px; 
+}
 
 

@@ -8,12 +8,14 @@ namespace GisysArbetsprov.Models.ViewModels
 {
     public class AddConsultantVM
     {
-        [Required]
+        [Required(ErrorMessage ="Ange förnamn")]
+        [StringLength(30, MinimumLength = 3)]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Ange efternamn")]
 
         public string LastName { get; set; }
 
+        [Required(ErrorMessage ="Ange anställningsdatum")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DateOfEmployment { get; set; }
 

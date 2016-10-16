@@ -9,6 +9,7 @@ using GisysArbetsprov.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,9 +28,8 @@ namespace GisysArbetsprov.Controllers
 
         public IActionResult List()
         {
-            // GET DATA FROM DB - WITH EF - GET ALL CONSULTANTS :) 
             var viewModel = dataManager.GetConsultantsFromDB();
-
+    
             return View(viewModel);
         }
         public IActionResult Calculate()
@@ -39,20 +39,24 @@ namespace GisysArbetsprov.Controllers
         }
         public IActionResult Update(UpdateConsultantVM viewModel)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
-            //    return RedirectToAction("List");
-            //}
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+                return RedirectToAction("List");
+            }
 
             dataManager.UpdateConsultantInfoDB(viewModel);
 
             ViewBag.Message = "Update Succeeded";
             return RedirectToAction("List");
         }
-
         public IActionResult AddHoursWorked(ConsultantCalculateVM viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Message = "Något gick fel.. Angav du timmarna i rätt format?";
+                return RedirectToAction("List");
+            }
             dataManager.UpdateHoursForConsultant(viewModel);
             return RedirectToAction("Calculate");
         }
@@ -61,8 +65,8 @@ namespace GisysArbetsprov.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //ViewBag.Message = "Something went wrong.. Did you submit the values in the right format? ";
                 ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+                
                 return RedirectToAction("List");
 
             }
@@ -72,7 +76,6 @@ namespace GisysArbetsprov.Controllers
             return RedirectToAction("List");
 
 
-            // Lägg till View(_partialView) :) 
         }
 
         public IActionResult DeleteConsultant(int id)
@@ -80,8 +83,7 @@ namespace GisysArbetsprov.Controllers
             var result = dataManager.RemoveConsultantFromDB(id);
             if (result)
             {
-                //ViewBag.Message = "Consultant successfully deleted";
-                //return RedirectToAction("Consultant", "List");
+                ViewBag.Message = "Consultant successfully deleted";
                 return RedirectToAction("List");
             }
             else
@@ -93,8 +95,7 @@ namespace GisysArbetsprov.Controllers
         }
         public IActionResult GetConsultantInfo(int id)
         {
-            var viewModel = new AddConsultantVM();
-            viewModel = dataManager.GetSingleConsultantInfo(id);
+            var viewModel = dataManager.GetSingleConsultantInfo(id);
             return View(viewModel);
         }
 

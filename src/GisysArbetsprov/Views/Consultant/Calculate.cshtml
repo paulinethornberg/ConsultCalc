@@ -6,7 +6,6 @@
 @if (ViewBag.Message != null)
 {
     <div class="small-12 columns">
-
         <div data-alert class="alert-box warning">
             <i class="fi-alert"></i> Please fill in all required fields. @ViewBag.Message
             <a href="#" class="close">&CircleTimes;</a>
@@ -15,7 +14,7 @@
 }
 
 <div class="row">
-    <div class="addButton"><button style="background-color:black" class="button" data-open="UpdateModal">Set performance and calculate bonus</button></div>
+    <div class="addButton"><button style="background-color:black" class="button tableStyle" data-open="UpdateModal">Ange resultat och beräkna bonus</button></div>
 </div>
 
 @*<div class="row" id="content">
@@ -23,16 +22,15 @@
 <div class="row column">
 
     <table class="center">
-        >
         <thead>
             <tr>
-                <th></th>
-                <th width="200">Förnamn</th>
-                <th width="200">Efternamn</th>
-                <th>Anställningsnummer</th>
-                <th>Anställningstid (år)</th>
-                <th>Lojalitetsfaktor</th>
-                <th>Debiterade timmar</th>
+                <th width="200"></th>
+                <th width="150">Förnamn</th>
+                <th width="150">Efternamn</th>
+                <th width="150">AnställningsID</th>
+                <th width="150">År anställd</th>
+                <th width="150">Lojalitet</th>
+                <th width="180">Debiterat (h)</th>
                 <th width="150">Actions</th>
                 <th width="150">Bonus</th>
             </tr>
@@ -40,8 +38,9 @@
         <tbody>
             @foreach (var consultant in Model)
             {
-                <tr class="tableStyle" id="@consultant.Id">
-                    <td><img src="~/Images/consultant.jpg" /></td>
+                <tr class="textStyle" id="@consultant.Id">
+
+                    <td><img style="width:50%" src="~/Images/pauline-profilbild.png" /></td>
                     <td class="firstName">@consultant.FirstName</td>
                     <td> @consultant.LastName</td>
                     <td id="id">@consultant.Id</td>
@@ -49,8 +48,8 @@
                     <td id="loyalty">@consultant.LoyaltyFactor</td>
                     <td id="hours">@consultant.HoursWorked</td>
                     @*<td id="id"><input type="number" value="@consultant.HoursWorked"/></td>*@
-                    <td><button id="edit" class="button" data-open="MyModal" onclick="UpdateHours(@consultant.Id)">Updatera debiterade timmar</button></td>
-                    <td><p id="bonus">@consultant.Bonus</p></td>
+                    <td><button id="edit" class="button blueButton" data-open="MyModal" onclick="UpdateHours(@consultant.Id)">Updatera debiterade timmar</button></td>
+                    <td><p class="bonus">@consultant.Bonus</p></td>
                 </tr>
             }
 
@@ -59,14 +58,11 @@
     </table>
 </div>
 
-
-
 <div class="small reveal" id="MyModal" data-reveal>
-    @*@Html.Partial("_ConsultantCRUD")*@
     <form data-abide method="post" action="AddHoursWorked">
         <div class="name-field">
             <label>
-                EmployeeId
+                Anställningsnummer
                 <input type="text" id="idHoursForm" required name="Id" readonly>
             </label>
         </div>
@@ -77,11 +73,11 @@
         </div>
         <div class="name-field">
             <label>
-                Hours charged:
+                Debiterade timmar:
                 <input type="number" id="hoursWorked" name="HoursWorked">
             </label>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" class="blueButton">Uppdatera</button>
     </form>
 
 
@@ -90,20 +86,14 @@
     </button>
 </div>
 
-
-@*<h1>Total performance: </h1>
-<h2 id="totalPerf">
-    1 000 000
-</h2>*@
-@*<button class="button" data-open="PerfModal">Set performance and calculate bonus</button>*@
 <div class="small reveal" id="UpdateModal" data-reveal>
     <form data-abide method="post" action="CalculateBonus">
         <div class="name-field">
             <label>
-                Performance to calculate bonus
+                Ange resultat för att beräkna ny bonus (presenteras längst till höger i tabellen)
                 <input type="number" id="totalPerformance" name="Performace">
             </label>
-            <button id="bonusClick" class="submit" onclick="ShowBonus()">Submit performace and calculate new bonus</button>
+            <button id="bonusClick" class="submit blueButton" onclick="ShowBonus()">Beräkna bonus</button>
         </div>
     </form>
 </div> 
