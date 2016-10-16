@@ -1,4 +1,6 @@
-
+.none {
+    visibility:hidden;
+}
 
 body {
     /*background-image: url('../images/2016-10-13 (2).png');*/
@@ -147,5 +149,6 @@ footer{
    padding: 12em 12em;
       font-size:20px; 
 }
+
 
 

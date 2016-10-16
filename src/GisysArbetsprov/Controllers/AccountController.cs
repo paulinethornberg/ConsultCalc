@@ -33,12 +33,6 @@ namespace GisysArbetsprov.Controllers
 
 
         [AllowAnonymous]
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Register()
         {
             return View();
@@ -51,8 +45,6 @@ namespace GisysArbetsprov.Controllers
                 return View(model);
 
             await _identityContext.Database.EnsureCreatedAsync();
-
-            //Todo: add email when regestering. 
 
             var user = new IdentityUser()
             {
@@ -76,6 +68,9 @@ namespace GisysArbetsprov.Controllers
         [AllowAnonymous]
         public async Task<bool> Login(AccountLoginVM viewModel)
         {
+            if (!ModelState.IsValid)
+                return false;
+
             var result = await _signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
             return result.Succeeded;
         }
@@ -84,6 +79,13 @@ namespace GisysArbetsprov.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public bool CheckIsLoggedIn()
+        {
+            bool isLogged = User.Identity.IsAuthenticated;
+            return isLogged;
         }
 
     }

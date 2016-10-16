@@ -1,6 +1,5 @@
-﻿@model AddConsultantVM
+﻿@model UpdateConsultantVM
 
-<div class="small reveal" id="MyModal" data-reveal>
     @*@Html.Partial("_ConsultantCRUD")*@
     @if (ViewBag.Message != null)
     {
@@ -38,6 +37,4 @@
     <button class="close-button small" data-close aria-label="Close modal" type="button">
         <span aria-hidden="true">&times;</span>
     </button>
-</div>
 
-<button class="button success" data-open="MyModal">Add Consultant</button>

@@ -10,9 +10,11 @@ namespace GisysArbetsprov.Models.ViewModels
     {
 
         [Required(ErrorMessage = "Ange förnamn")]
-        [StringLength(30, MinimumLength = 3)]
+        [StringLength(30, MinimumLength = 2)]
         public string FirstName { get; set; }
+
         [Required(ErrorMessage = "Ange efternamn")]
+        [StringLength(30, MinimumLength = 2)]
 
         public string LastName { get; set; }
 

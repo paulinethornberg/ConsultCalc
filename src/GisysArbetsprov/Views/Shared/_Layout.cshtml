@@ -7,17 +7,20 @@
 
     <link href="~/CSS/app.css" rel="stylesheet" />
     <link href="~/CSS/foundation.css" rel="stylesheet" />
-   
-
+ 
 </head>
 <body>
     <header class="header tableStyle">
         <ul class="header-subnav is-dropdown-menu" data-dropdown-menu>
             <li><a id="menu" href="/home/index" class="is-active-none">Hem</a></li>
-            <li><a id="menu" href="/consultant/list" class="is-active-none">Konsulter</a></li>
+            <li><a id="menu" href="/consultant/list" class="is-active-none" >Konsulter</a></li>
             <li><a id="menu" href="/consultant/calculate" class="is-active-none">Bonus</a></li>
         </ul>
+       
     </header>
+    <script>
+
+    </script>
     <div>
         @RenderBody()
     </div>
@@ -26,6 +29,7 @@
     <script src="~/Scripts/foundation.min.js"></script>
     <script src="~/Scripts/app.js"></script>
     <script src="~/Scripts/jquery.mixitup.min.js"></script>
+    <script src="~/Scripts/checkIsLoggedIn.js"></script>
     <script>
   $(document).foundation();
     </script>

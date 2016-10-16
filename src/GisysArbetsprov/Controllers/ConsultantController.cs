@@ -26,10 +26,18 @@ namespace GisysArbetsprov.Controllers
             _environment = environment;
         }
 
+        //[Authorize]
         public IActionResult List()
         {
             var viewModel = dataManager.GetConsultantsFromDB();
-    
+
+            //if (TempData["status"] != null)
+            //{
+            //    ViewBag.Status = "Success";
+            //    TempData.Remove("status");
+            //    //ViewBag.Message = TempData["status"].ToString();
+            //}
+              
             return View(viewModel);
         }
         public IActionResult Calculate()
@@ -41,7 +49,8 @@ namespace GisysArbetsprov.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+                //ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+                TempData["status"] = "Success";
                 return RedirectToAction("List");
             }
 
@@ -55,7 +64,7 @@ namespace GisysArbetsprov.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Message = "Något gick fel.. Angav du timmarna i rätt format?";
-                return RedirectToAction("List");
+                return RedirectToAction("Calculate");
             }
             dataManager.UpdateHoursForConsultant(viewModel);
             return RedirectToAction("Calculate");

@@ -11,8 +11,7 @@ namespace GisysArbetsprov.Models.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DateOfEmployement { get; set; }
-        public double HoursNoted { get; set; }
 
-        public int EmployeeCategory { get; set; }
+        public string Message { get; set; }
     }
 }

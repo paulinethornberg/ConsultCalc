@@ -28,7 +28,7 @@ namespace GisysArbetsprov
             {
                 o.Password.RequiredLength = 6;
                 o.Password.RequireDigit = false;
-                o.Cookies.ApplicationCookie.LoginPath = "/account/login";
+                o.Cookies.ApplicationCookie.LoginPath = "/home/index";
             })
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
