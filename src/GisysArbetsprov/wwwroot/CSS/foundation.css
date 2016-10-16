@@ -429,7 +429,7 @@ button {
   display: none !important; }
 
 .row {
-  max-width: 75rem;
+  /*max-width: 75rem;*/
   margin-left: auto;
   margin-right: auto; }
   .row::before, .row::after {
@@ -459,7 +459,7 @@ button {
 
 .column, .columns {
   width: 100%;
-  float: left;
+  /*float: left;*/
   padding-left: 0.625rem;
   padding-right: 0.625rem; }
   @media screen and (min-width: 40em) {
@@ -2910,7 +2910,7 @@ html.is-reveal-open body {
       max-width: 75rem; } }
   @media screen and (min-width: 40em) {
     .reveal.small {
-      width: 50%;
+      /*width: 50%;*/
       max-width: 75rem; } }
   @media screen and (min-width: 40em) {
     .reveal.large {
@@ -3147,7 +3147,7 @@ html.is-reveal-open body {
   left: 2.75rem; }
 
 table {
-  width: 100%;
+  /*width: 100%;*/
   margin-bottom: 1rem;
   border-radius: 0; }
   table thead,
@@ -3160,8 +3160,12 @@ table {
     padding: 0.5rem 0.625rem 0.625rem; }
   table thead,
   table tfoot {
-    background: #f8f8f8;
-    color: #0a0a0a; }
+
+    background-image: url('../images/2016-10-13 (2).png');
+    /*background: #f8f8f8;*/
+    color: white;
+    font-size:20px;
+  }
     table thead tr,
     table tfoot tr {
       background: transparent; }

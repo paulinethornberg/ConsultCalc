@@ -101,7 +101,9 @@ namespace GisysArbetsprov.Controllers
         public IActionResult CalculateBonus(ConsultantCalculateVM viewModel)
         {
             dataManager.CalculateBonusAndAddToDB(viewModel);
-   
+
+
+            ViewBag.Message = "Bonus Updates";
             return RedirectToAction("Calculate");
         }
         

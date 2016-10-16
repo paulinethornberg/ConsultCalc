@@ -14,9 +14,14 @@
         </div>
     </div>
 }
-<h1>Consultants</h1>
 
-<div class="small reveal" id="MyModal" data-reveal>
+<div class="row">
+    <div class="addButton"><button class="button success" data-open="MyModal">Add New Consultant</button></div>
+</div>
+
+
+
+<div class="small reveal center" id="MyModal" data-reveal>
     @*@Html.Partial("_ConsultantCRUD")*@
     @if (ViewBag.Message != null)
     {
@@ -49,43 +54,44 @@
         </div>
         <button type="submit">Submit</button>
     </form>
-   
 
-<button class="close-button small" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-</button>
+
+    <button class="close-button small" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 
-<button class="button success" data-open="MyModal">Add Consultant</button>
 
-
-
+@*<div class="row" id="content">
+    <div class="medium-8 columns">*@
 <div class="row column">
 
-    <table>
+    <table class="center">
         <thead>
             <tr>
-                <th width="200">First Name</th>
-                <th width="200">Last Name</th>
-                <th>Employment ID</th>
-                <th width="150">Date Of Employment</th>
-                <th width="150">Actions</th>
+                <th></th>
+                <th width="200">FÖRNAMN</th>
+                <th width="200">EFTERNAMN</th>
+                <th>ANSTÄLLNINGSNUMMER</th>
+                <th width="150">ANSTÄLLNINGSDATUM</th>
+                <th width="150">ACTIONS</th>
                 <th width="150"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var consultant in Model)
             {
-                <tr id="@consultant.EmployeeId">
+                <tr class="tableStyle" id="@consultant.EmployeeId">
+                    <td><img src="~/Images/consultant.jpg" /></td>
                     <td id="firstName">@consultant.FirstName</td>
                     <td id="lastName"> @consultant.LastName</td>
                     <td id="empId">@consultant.EmployeeId</td>
                     <td id="dateEmp">@consultant.DateOfEmployement</td>
-                    <td><button class="button" OnClick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
-                    <td><button class="button alert"id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+                    <td><button class="button" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
+                    <td><button class="button alert" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
                     @*<a href="#" class="alert-button alert">Alert Button</a>*@
 
-                    
+
                 </tr>
             }
 
@@ -93,36 +99,105 @@
     </table>
 </div>
 
-<div>
-
-
-        <form data-abide method="post" action="Update">
-            <div class="name-field">
-                <label>
-                    EmployeeId
-                    <input type="text" id="idUpdateForm" required name="Id" readonly>
-                </label>
-            </div>
-            <div class="name-field">
-                <label>
-                    Förnamn
-                    <input type="text" id="firsNameUpdateForm" required pattern="[a-zA-Z]+" name="FirstName">
-                </label>
-            </div>
-            <div class="name-field">
-                <label>
-                    Efternamn
-                    <input type="text" id="lastNameUpdateForm" required name="LastName">
-                </label>
-            </div>
-            <div class="date-field">
-                <label>
-                    Anställningsdatum
-                    <input type="date" id="dateUpdateForm" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
-                </label>
-            </div>
-            <button type="submit">Update!</button>
-        </form>
-
-            
+<div class="small reveal center" id="UpdateModal" data-reveal>
+    <form data-abide method="post" action="Update">
+        <div class="name-field">
+            <label>
+                EmployeeId
+                <input type="text" id="idUpdateForm" required name="Id" readonly>
+            </label>
+        </div>
+        <div class="name-field">
+            <label>
+                Förnamn
+                <input type="text" id="firsNameUpdateForm" required pattern="[a-zA-Z]+" name="FirstName">
+            </label>
+        </div>
+        <div class="name-field">
+            <label>
+                Efternamn
+                <input type="text" id="lastNameUpdateForm" required name="LastName">
+            </label>
+        </div>
+        <div class="date-field">
+            <label>
+                Anställningsdatum
+                <input type="date" id="dateUpdateForm" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
+            </label>
+        </div>
+        <button type="submit">Update!</button>
+    </form>
 </div>
+
+@*<h2>Responsive Table using Tablesaw with Toggle and Mini Map</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <table summary="This table shows how to create responsive tables using Tablesaw's functionality" class="table table-bordered table-hover" data-tablesaw-mode="columntoggle" data-tablesaw-minimap>
+                    <caption class="text-center">
+                        An example of a responsive table based on <a href="https://github.com/filamentgroup/tablesaw">Tablesaw with Toggle and Mini Map</a>.
+                        <thead>
+                            <tr>
+                                <th data-tablesaw-priority="persist">Country</th>
+                                <th data-tablesaw-priority="2">Languages</th>
+                                <th data-tablesaw-priority="3">Population</th>
+                                <th data-tablesaw-priority="4">Median Age</th>
+                                <th data-tablesaw-priority="5">Area (Km²)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Argentina</td>
+                                <td>Spanish (official), English, Italian, German, French</td>
+                                <td>41,803,125</td>
+                                <td>31.3</td>
+                                <td>2,780,387</td>
+                            </tr>
+                            <tr>
+                                <td>Australia</td>
+                                <td>English 79%, native and other languages</td>
+                                <td>23,630,169</td>
+                                <td>37.3</td>
+                                <td>7,739,983</td>
+                            </tr>
+                            <tr>
+                                <td>Greece</td>
+                                <td>Greek 99% (official), English, French</td>
+                                <td>11,128,404</td>
+                                <td>43.2</td>
+                                <td>131,956</td>
+                            </tr>
+                            <tr>
+                                <td>Luxembourg</td>
+                                <td>Luxermbourgish (national) French, German (both administrative)</td>
+                                <td>536,761</td>
+                                <td>39.1</td>
+                                <td>2,586</td>
+                            </tr>
+                            <tr>
+                                <td>Russia</td>
+                                <td>Russian, others</td>
+                                <td>142,467,651</td>
+                                <td>38.4</td>
+                                <td>17,076,310</td>
+                            </tr>
+                            <tr>
+                                <td>Sweden</td>
+                                <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+                                <td>9,631,261</td>
+                                <td>41.1</td>
+                                <td>449,954</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Data retrieved from <a href="http://www.infoplease.com/ipa/A0855611.html" target="_blank">infoplease</a> and <a href="http://www.worldometers.info/world-population/population-by-country/" target="_blank">worldometers</a>.</td>
+                            </tr>
+                        </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <p class="p">Demo by George Martsoukos. <a href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions" target="_blank">See article</a>.</p>*@

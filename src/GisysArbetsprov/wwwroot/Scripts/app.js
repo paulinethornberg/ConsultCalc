@@ -1,17 +1,17 @@
 ﻿$(document).foundation();
 
-$(document).ready(function () {
-    $("#edit").click(function () {
-        $("#bonus").hide();
-    });
-    $("#bonusClick").click(function () {
-        $("#bonus").show();
-    });
+
+$("#edit").click(function () {
+    $("#bonus").hide();
+});
+$("#bonusClick").click(function () {
+    $("#bonus").show();
 });
 
 
+
 function UpdateHours(id) {
-    
+
     $('#idHoursForm').val(id);
 }
 
@@ -19,8 +19,8 @@ function UpdateHours(id) {
 $("#deleteButton").click(function () {
     $.post("/Consultant/DeleteConsultant", function (deleteResult) {
         if (deleteResult)
-            window.location.href = "/";
-            
+            window.location.href = "/Consultant/List";
+
         else
             window.location.href = "/Consultant/List";
     });

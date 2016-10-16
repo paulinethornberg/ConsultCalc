@@ -1,11 +1,18 @@
+
+
 body {
     background-image: url('../images/2016-10-13 (2).png');
     background-color: #cccccc;
 }
 
+table {
+    background-image: url('../images/2016-10-13 (2).png');
+}
+
 .header {
   text-align: center;
-  background: #f9b234;
+  /*background: #f9b234;*/
+  background: #222;
   background-size: cover;
   position: relative;
   overflow: visible;
@@ -45,9 +52,22 @@ div { display:inline-block; width: 100%; }
 .center {
   margin-left: auto ;
   margin-right: auto ;
-  text-align:center;
+  /*text-align:center;*/
 }
 
+.centerButton {
+  margin-left: auto ;
+  margin-right: auto ;
+  text-align:center;
+      padding: 200px;
+}
+
+.addButton {
+  margin-left: auto ;
+  margin-right: auto ;
+  text-align:center;
+      padding: 100px;
+}
 .body {
     padding: 80px 0px;
 }
@@ -78,7 +98,28 @@ footer{
 
 .hidden { display: none; }
 
-/*-------------------BUTTON GROUPS FOR TAGS
+.imageFirst {
+    height: 500px;
+    width: 500px;
+}
+
+#MyModal {
+      display: block;
+    max-height: 5872px;
+    top: 2873px;
+}
+#UpdateModal {
+      display: block;
+    max-height: 5872px;
+    top: 2873px;
+}
+
+.tableStyle{
+    background-image: url('../images/2016-10-13 (2).png');
+    color: white; 
+    font-size: 18px;
+    font-weight:bold;
+}
 
 
 
