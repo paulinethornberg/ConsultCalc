@@ -42,7 +42,7 @@
                 <th width="150">År anställd</th>
                 <th width="150">Lojalitet</th>
                 <th width="180">Debiterat (h)</th>
-                <th width="150">Actions</th>
+                <th width="150"></th>
                 <th width="150">Bonus</th>
             </tr>
         </thead>
@@ -51,14 +51,14 @@
             {
                 <tr class="textStyle" id="@consultant.Id">
 
-                    <td><img style="width:50%" src="~/Images/pauline-profilbild.png" /></td>
+                    <td ><img style="width:50%" src="~/Images/pauline-profilbild.png" /></td>
                     <td class="firstName">@consultant.FirstName</td>
                     <td> @consultant.LastName</td>
                     <td id="id">@consultant.Id</td>
                     <td id="dateEmp">@consultant.EmployeeCategory</td>
                     <td id="loyalty">@consultant.LoyaltyFactor</td>
                     <td id="hours">@consultant.HoursWorked</td>
-                    <td><button class="button blueButton hideBonus" data-open="MyModal" onclick="UpdateHours(@consultant.Id)">Updatera debiterade timmar</button></td>
+                    <td ><button class="button blueButton hideBonus" data-open="MyModal" onclick="UpdateHours(@consultant.Id)">Uppdatera debiterade timmar</button></td>
                     <td><p class="bonus none">@consultant.Bonus</p></td>
                 </tr>
             }
@@ -86,7 +86,7 @@
                 <input type="number" id="hoursWorked" name="HoursWorked">
             </label>
         </div>
-        <button type="submit" class="blueButton">Uppdatera</button>
+        <button type="submit" class="button blueButton">Uppdatera</button>
     </form>
 
 
@@ -102,7 +102,7 @@
                 Ange resultat för att beräkna ny bonus (presenteras längst till höger i tabellen)
                 <input type="number" id="totalPerformance" name="Performace">
             </label>
-            <button id="bonusClick" class="submit blueButton">Beräkna bonus</button>
+            <button id="bonusClick" class="button submit blueButton">Beräkna bonus</button>
         </div>
     </form>
 </div> 

@@ -121,7 +121,8 @@ namespace GisysArbetsprov.Models
             {
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
-                DateOfEmployment = viewModel.DateOfEmployment
+                DateOfEmployment = viewModel.DateOfEmployment,
+                HoursWorked = 0
             };
 
             _context.Consultants.Add(consultant);

@@ -19,7 +19,7 @@
 }
 
     <div class="row">
-        <div class="addButton"><button class="button tableStyle" data-open="MyModal">Add New Consultant</button></div>
+        <div class="addButton"><button class="button tableStyle" data-open="MyModal">Lägg till konsult</button></div>
     </div>
 
     <div class="small reveal center" id="MyModal" data-reveal>
@@ -43,7 +43,7 @@
                     <input type="date" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
                 </label>
             </div>
-            <button type="submit" class="blueButton">Submit</button>
+            <button type="submit" class="button blueButton">Lägg till</button>
         </form>
 
 
@@ -62,7 +62,7 @@
                     <th width="200">Efternamn</th>
                     <th width="150">AnställningsID</th>
                     <th width="150">Anställningsdatum</th>
-                    <th width="150">Actions</th>
+                    <th width="150"></th>
                     <th width="150"></th>
                 </tr>
             </thead>
@@ -75,8 +75,8 @@
                         <td id="lastName"> @consultant.LastName</td>
                         <td id="empId">@consultant.EmployeeId</td>
                         <td id="dateEmp">@consultant.DateOfEmployement</td>
-                        <td><button class="button blueButton" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
-                        <td><button class="button redButton" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+                        <td><button class="button blueButton" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Uppdatera</button></td>
+                        <td><button class="button redButton" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Ta bort</button></td>
                     </tr>
                 }
 
@@ -88,7 +88,7 @@
         <form data-abide method="post" action="Update">
             <div class="name-field">
                 <label>
-                    EmployeeId
+                    AnställningsID
                     <input type="text" id="idUpdateForm" required name="Id" readonly>
                 </label>
             </div>
@@ -110,6 +110,6 @@
                     <input type="date" id="dateUpdateForm" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
                 </label>
             </div>
-            <button type="submit" class="blueButton">Update!</button>
+            <button type="submit" class="button blueButton">Uppdatera</button>
         </form>
     </div>
