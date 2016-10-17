@@ -1,11 +1,10 @@
-﻿@model RegisterVM
+﻿@model AccountRegisterVM
 <form asp-controller="Account" asp-action="Register" id="regform">
     <div id="regform" name="register-form">
         <div class="form-group">
             <label asp-for="UserName"></label>
             <input asp-for="UserName" class="form-control" />
             <span asp-validation-for="UserName" class="text-danger"></span>
-            @*<input type="text" name="usernameReg" id="usernameReg" tabindex="1" class="form-control" placeholder="Username">*@
         </div>
         <div class="form-group">
             <label asp-for="Email"></label>
@@ -16,22 +15,13 @@
             <label asp-for="Password"></label>
             <input asp-for="Password" type="password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
-            @*<input type="password" name="passwordReg" id="passwordReg" placeholder="Password">*@
         </div>
-        @*<div>
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password">
-            </div>*@
         <div>
             <div>
                 <div>
                     <button type="submit" class="btn btn-lg btn-success" value="Submit">Submit!</button>
-                    @*<input type="submit" name="registerSubmit" id="registerSubmit" href="user/register "value="Register Now">*@
                 </div>
             </div>
         </div>
     </div>
 </form>
-<scripts>
-    <link href="~/CSS/skeleton.css" rel="stylesheet" />
-    <link href="~/CSS/normalize.css" rel="stylesheet" />
-</scripts>

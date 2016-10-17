@@ -1,114 +1,115 @@
 ﻿@model ConsultantListVM[]
 <script src="~/Scripts/jquery.min.js"></script>
 <script src="~/Scripts/jquery.mixitup.min.js"></script>
-
 <script src="~/Scripts/foundation.min.js"></script>
 <script src="~/Scripts/app.js"></script>
 
-@if (ViewBag.Message != null)
+@if (ViewBag.Status != null)
 {
-    <div class="small-12 columns">
-
-        <div data-alert class="alert-box warning">
-            <i class="fi-alert"></i> Please fill in all required fields. @ViewBag.Message
-            <a href="#" class="close">&CircleTimes;</a>
+    <div class="small-12 columns center">
+        <div id="aleralert" data-alert class="alert-box blueButton alert">
+            @ViewBag.Status
         </div>
     </div>
+    <script>
+        $(aleralert).fadeTo(2000, 500).slideUp(500, function () {
+            $(aleralert).slideUp(500);
+        });
+    </script>
 }
-<div class="row">
-    <div class="addButton"><button class="button tableStyle" data-open="MyModal">Add New Consultant</button></div>
-</div>
 
-<div class="small reveal center" id="MyModal" data-reveal>
-    @*@Html.Partial("_Update")*@
+    <div class="row">
+        <div class="addButton"><button class="button tableStyle" data-open="MyModal">Add New Consultant</button></div>
+    </div>
+
+    <div class="small reveal center" id="MyModal" data-reveal>
+
+        <form data-abide method="post" action="AddConsultant">
+            <div class="name-field">
+                <label>
+                    Förnamn
+                    <input type="text" id="firsNameForm" required name="FirstName">
+                </label>
+            </div>
+            <div class="name-field">
+                <label>
+                    Efternamn
+                    <input type="text" id="lastNameForm" required name="LastName">
+                </label>
+            </div>
+            <div class="date-field">
+                <label>
+                    Anställningsdatum
+                    <input type="date" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
+                </label>
+            </div>
+            <button type="submit" class="blueButton">Submit</button>
+        </form>
 
 
-    <form data-abide method="post" action="AddConsultant">
-        <div class="name-field">
-            <label>
-                Förnamn
-                <input type="text" id="firsNameForm" required pattern="[a-zA-Z]+" name="FirstName">
-            </label>
-        </div>
-        <div class="name-field">
-            <label>
-                Efternamn
-                <input type="text" id="lastNameForm" required pattern="[a-zA-Z]+" name="LastName">
-            </label>
-        </div>
-        <div class="date-field">
-            <label>
-                Anställningsdatum
-                <input type="date" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
-            </label>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+        <button class="close-button small" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
+    <div class="row column">
 
-    <button class="close-button small" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-<div class="row column">
-
-    <table class="center">
-        <thead>
-            <tr>
-                <th width="200"></th>
-                <th width="200">Förnamn</th>
-                <th width="200">Efternamn</th>
-                <th width="150">AnställningsID</th>
-                <th width="150">Anställningsdatum</th>
-                <th width="150">Actions</th>
-                <th width="150"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var consultant in Model)
-            {
-                <tr class="textStyle" id="@consultant.EmployeeId">
-                    <td><img style="width:50%" src="~/Images/pauline-profilbild.png" /> </td>
-                    <td id="firstName">@consultant.FirstName</td>
-                    <td id="lastName"> @consultant.LastName</td>
-                    <td id="empId">@consultant.EmployeeId</td>
-                    <td id="dateEmp">@consultant.DateOfEmployement</td>
-                    <td><button class="button blueButton" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
-                    <td><button class="button redButton" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+        <table class="center">
+            <thead>
+                <tr>
+                    <th width="200"></th>
+                    <th width="200">Förnamn</th>
+                    <th width="200">Efternamn</th>
+                    <th width="150">AnställningsID</th>
+                    <th width="150">Anställningsdatum</th>
+                    <th width="150">Actions</th>
+                    <th width="150"></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var consultant in Model)
+            {
+                    <tr class="textStyle" id="@consultant.EmployeeId">
+                        <td><img style="width:50%" src="~/Images/pauline-profilbild.png" /> </td>
+                        <td id="firstName">@consultant.FirstName</td>
+                        <td id="lastName"> @consultant.LastName</td>
+                        <td id="empId">@consultant.EmployeeId</td>
+                        <td id="dateEmp">@consultant.DateOfEmployement</td>
+                        <td><button class="button blueButton" data-open="UpdateModal" onclick="GetConsultantInfo(@consultant.EmployeeId)">Edit</button></td>
+                        <td><button class="button redButton" id="deleteButton" onclick="DeleteUser(@consultant.EmployeeId)" alert>Delete</button></td>
+                    </tr>
+                }
 
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 
-<div class="small reveal center" id="UpdateModal" data-reveal>
-    <form data-abide method="post" action="Update">
-        <div class="name-field">
-            <label>
-                EmployeeId
-                <input type="text" id="idUpdateForm" required name="Id" readonly>
-            </label>
-        </div>
-        <div class="name-field">
-            <label>
-                Förnamn
-                <input type="text" id="firsNameUpdateForm" required pattern="[a-zA-Z]+" name="FirstName">
-            </label>
-        </div>
-        <div class="name-field">
-            <label>
-                Efternamn
-                <input type="text" id="lastNameUpdateForm" required pattern="[a-zA-Z]+" name="LastName">
-            </label>
-        </div>
-        <div class="date-field">
-            <label>
-                Anställningsdatum
-                <input type="date" id="dateUpdateForm" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
-            </label>
-        </div>
-        <button type="submit">Update!</button>
-    </form>
-</div>
+    <div class="small reveal center" id="UpdateModal" data-reveal>
+        <form data-abide method="post" action="Update">
+            <div class="name-field">
+                <label>
+                    EmployeeId
+                    <input type="text" id="idUpdateForm" required name="Id" readonly>
+                </label>
+            </div>
+            <div class="name-field">
+                <label>
+                    Förnamn
+                    <input type="text" id="firsNameUpdateForm" required name="FirstName">
+                </label>
+            </div>
+            <div class="name-field">
+                <label>
+                    Efternamn
+                    <input type="text" id="lastNameUpdateForm" required name="LastName">
+                </label>
+            </div>
+            <div class="date-field">
+                <label>
+                    Anställningsdatum
+                    <input type="date" id="dateUpdateForm" required pattern="[YYYY-MM-DD]" name="DateOfEmployment">
+                </label>
+            </div>
+            <button type="submit" class="blueButton">Update!</button>
+        </form>
+    </div>

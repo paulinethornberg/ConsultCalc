@@ -1,14 +1,6 @@
 ﻿$(document).foundation();
 
 
-$("#edit").click(function () {
-    $(".bonus").hide();
-});
-$("#bonusClick").click(function () {
-    $(".bonus").show();
-});
-
-
 
 function UpdateHours(id) {
 
@@ -25,9 +17,6 @@ $("#deleteButton").click(function () {
             window.location.href = "/Consultant/List";
     });
 });
-
-//function GetConsultantInfo(id) {
-//    $.post("/Consultant/GetConsultantInfo",  {"id": id})}
 
 
 function DeleteUser(id) {
@@ -56,5 +45,6 @@ function GetConsultantInfo(id) {
 
     $('#idUpdateForm').val(id);
 
-
 }
+
+

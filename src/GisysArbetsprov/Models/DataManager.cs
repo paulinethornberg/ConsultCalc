@@ -79,7 +79,10 @@ namespace GisysArbetsprov.Models
         private double GenerateLoyaltyFactor(DateTime dateofEmployment)
         {
             var yearsOfemployment = CalculateYearsOfEmployment(dateofEmployment);
-            
+
+            if (yearsOfemployment < 0)
+                return 1;
+
             switch (yearsOfemployment)
             {
                 case 0:
@@ -105,7 +108,10 @@ namespace GisysArbetsprov.Models
 
             tempYears = days / 365;
             int years = Convert.ToInt32(Math.Round(tempYears));
-         
+
+            // If consultant haven't started, years will be 0 (not negative)
+            if (years < 0)
+                return 0;
             return years;
         }
 
@@ -128,7 +134,7 @@ namespace GisysArbetsprov.Models
             //get the 5% of the performance
             double bonusBase = 0.05 * viewModel.Performace;
 
-            // get a list of all consultants
+            // get list of all consultants
             var consultants = GetConsultantsWithBonusInfoFromDB();
         
             //logic to calculate the individual points and add to total
@@ -141,6 +147,7 @@ namespace GisysArbetsprov.Models
                 consulant.PerformancePoints = pointsHoursCharged;
             }
 
+            
             foreach (var consultant in consultants)
             {
                 consultant.Bonus = (consultant.PerformancePoints / totalPointsHoursCharged)*bonusBase;
@@ -171,7 +178,7 @@ namespace GisysArbetsprov.Models
 
         internal bool RemoveConsultantFromDB(int id)
         {
-            var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id); //returns a single item.
+            var itemToRemove = _context.Consultants.SingleOrDefault(x => x.Id == id);
             if (itemToRemove != null)
             {
                 _context.Consultants.Remove(itemToRemove);

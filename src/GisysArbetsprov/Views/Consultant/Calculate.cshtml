@@ -1,24 +1,35 @@
 ﻿@model ConsultantCalculateVM[]
 
 <link href="~/CSS/app.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.min.js"></script>
 
-
-@if (ViewBag.Message != null)
+@if (ViewBag.Status != null)
 {
-    <div class="small-12 columns">
-        <div data-alert class="alert-box warning">
-            <i class="fi-alert"></i> Please fill in all required fields. @ViewBag.Message
-            <a href="#" class="close">&CircleTimes;</a>
+    <div class="small-12 columns center">
+        <div id="aleralertC" data-alert class="alert-box blueButton alert">
+            @ViewBag.Status
         </div>
     </div>
+    <script>
+        $(aleralertC).fadeTo(2000, 500).slideUp(500, function () {
+            $(aleralertC).slideUp(500);
+        });
+    </script>
+}
+@if(ViewBag.Status == "Bonus Uppdaterad")
+{
+    <script>
+        $(document).ready(function () {
+            $(".bonus").removeClass("none");
+        });
+    </script>
 }
 
 <div class="row">
     <div class="addButton"><button style="background-color:black" class="button tableStyle" data-open="UpdateModal">Ange resultat och beräkna bonus</button></div>
 </div>
 
-@*<div class="row" id="content">
-    <div class="medium-8 columns">*@
+
 <div class="row column">
 
     <table class="center">
@@ -47,12 +58,10 @@
                     <td id="dateEmp">@consultant.EmployeeCategory</td>
                     <td id="loyalty">@consultant.LoyaltyFactor</td>
                     <td id="hours">@consultant.HoursWorked</td>
-                    @*<td id="id"><input type="number" value="@consultant.HoursWorked"/></td>*@
-                    <td><button id="edit" class="button blueButton" data-open="MyModal" onclick="UpdateHours(@consultant.Id)">Updatera debiterade timmar</button></td>
-                    <td><p class="bonus">@consultant.Bonus</p></td>
+                    <td><button class="button blueButton hideBonus" data-open="MyModal" onclick="UpdateHours(@consultant.Id)">Updatera debiterade timmar</button></td>
+                    <td><p class="bonus none">@consultant.Bonus</p></td>
                 </tr>
             }
-
 
         </tbody>
     </table>
@@ -93,7 +102,7 @@
                 Ange resultat för att beräkna ny bonus (presenteras längst till höger i tabellen)
                 <input type="number" id="totalPerformance" name="Performace">
             </label>
-            <button id="bonusClick" class="submit blueButton" onclick="ShowBonus()">Beräkna bonus</button>
+            <button id="bonusClick" class="submit blueButton">Beräkna bonus</button>
         </div>
     </form>
 </div> 

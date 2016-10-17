@@ -39,7 +39,7 @@ namespace GisysArbetsprov.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterVM model)
+        public async Task<IActionResult> Register(AccountRegisterVM model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -71,7 +71,7 @@ namespace GisysArbetsprov.Controllers
             if (!ModelState.IsValid)
                 return false;
 
-            var result = await _signInManager.PasswordSignInAsync(viewModel.Username, viewModel.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(viewModel.UserName, viewModel.Password, false, false);
             return result.Succeeded;
         }
 

@@ -26,47 +26,59 @@ namespace GisysArbetsprov.Controllers
             _environment = environment;
         }
 
+
+        // Logic implemented to use Authorize filter, but login view not yet finished
         //[Authorize]
         public IActionResult List()
         {
             var viewModel = dataManager.GetConsultantsFromDB();
 
-            //if (TempData["status"] != null)
-            //{
-            //    ViewBag.Status = "Success";
-            //    TempData.Remove("status");
-            //    //ViewBag.Message = TempData["status"].ToString();
-            //}
-              
+            if (TempData["status"] != null)
+            {
+                ViewBag.Status = TempData["status"].ToString();
+            }
+
             return View(viewModel);
         }
+
+        //
         public IActionResult Calculate()
         {
             var viewModel = dataManager.GetConsultantsWithBonusInfoFromDB();
+
+            if (TempData["status"] != null)
+            {
+                ViewBag.Status = TempData["status"];
+            }
             return View(viewModel);
         }
+
+        //Update consultant Info
         public IActionResult Update(UpdateConsultantVM viewModel)
         {
             if (!ModelState.IsValid)
             {
-                //ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
-                TempData["status"] = "Success";
+                TempData["status"] = "Uppdateringen misslyckades, försök igen!";
                 return RedirectToAction("List");
             }
 
             dataManager.UpdateConsultantInfoDB(viewModel);
 
-            ViewBag.Message = "Update Succeeded";
+            TempData["status"] = "Uppdateringen genomförd!";
             return RedirectToAction("List");
         }
+
+
         public IActionResult AddHoursWorked(ConsultantCalculateVM viewModel)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Något gick fel.. Angav du timmarna i rätt format?";
+                TempData["status"] = "Något gick fel.. försök igen!";
                 return RedirectToAction("Calculate");
             }
             dataManager.UpdateHoursForConsultant(viewModel);
+
+            TempData["status"] = "Uppdateringen genomförd!";
             return RedirectToAction("Calculate");
         }
             
@@ -74,14 +86,14 @@ namespace GisysArbetsprov.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Something went wrong.. Did you submit the values in the right format?";
+                TempData["status"] = "Något gick fel.. försök igen!";
                 
                 return RedirectToAction("List");
 
             }
             dataManager.SaveConsultantToDB(viewModel);
 
-            ViewBag.Message = "Consultant was successfully added!";
+            TempData["status"] = "Konsulten är tillagd!";
             return RedirectToAction("List");
 
 
@@ -89,15 +101,16 @@ namespace GisysArbetsprov.Controllers
 
         public IActionResult DeleteConsultant(int id)
         {
+
             var result = dataManager.RemoveConsultantFromDB(id);
             if (result)
             {
-                ViewBag.Message = "Consultant successfully deleted";
+                TempData["status"] = "Konsulten är borttagen";
                 return RedirectToAction("List");
             }
             else
             {
-                ViewBag.Message = "OUuupps something went wrong";
+                TempData["status"] = "Det gick inte att ta bort konsulten";
                 return RedirectToAction("List");
             }
 
@@ -110,10 +123,13 @@ namespace GisysArbetsprov.Controllers
 
         public IActionResult CalculateBonus(ConsultantCalculateVM viewModel)
         {
+
+            
+
             dataManager.CalculateBonusAndAddToDB(viewModel);
 
 
-            ViewBag.Message = "Bonus Updates";
+            TempData["status"] = "Bonus Uppdaterad";
             return RedirectToAction("Calculate");
         }
         

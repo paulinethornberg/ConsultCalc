@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GisysArbetsprov.Models.ViewModels
 {
-    public class RegisterVM
+    public class AccountRegisterVM
     {
         [Required]
         public string UserName { get; set; }
